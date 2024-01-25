@@ -1,0 +1,52 @@
+import java.util.Stack;
+
+public class Solution {
+    public static boolean isValidParenthesis(String str) {
+       
+       int x = str.length(); // storing size of input expression
+	Stack<Character> opening_Brackets = new Stack<>();
+        // iterating over the full expression using for loop
+	for (int k = 0; k < x; k++) {
+            // if opening bracket encounters then directly push it into stack.
+            if (str.charAt(k) == '{' || str.charAt(k) == '(' || str.charAt(k) == '[') {
+				opening_Brackets.push(str.charAt(k));
+			} 
+            else {
+                // If stack is empty return false
+                if (opening_Brackets.empty()) {
+		     return false;
+		 }
+                // If ) is encountered then check if top of the stack have ( or not       
+		 if (str.charAt(k) == ')') {
+	             char last = opening_Brackets.peek();
+		      opening_Brackets.pop();
+		      if (last != '(') {
+		          return false;
+			  }
+		  }
+                // If } is encountered then check if top of the stack have { or not   
+	         if (str.charAt(k) == '}') {
+		      char last = opening_Brackets.peek();
+		      opening_Brackets.pop();
+		      if (last != '{') {
+			  return false;
+		          }
+	         }
+                 // If ] is encountered then check if top of the stack have [ or not      
+		  if (str.charAt(k) == ']') {
+		      char last = opening_Brackets.peek();
+		      opening_Brackets.pop();
+		      if (last != '[') {
+		          return false;
+			  }
+	         }
+	    }
+        }
+		return opening_Brackets.isEmpty();
+    }  
+    
+    
+    
+    
+    
+}
